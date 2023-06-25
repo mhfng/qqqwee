@@ -70,7 +70,8 @@ redirectToNextURL();
 
 
 
-//const userAgent = navigator.userAgent;
+const userAgentData = navigator.userAgentData;
+  const userAgent = navigator.userAgent;
   const platform = navigator.platform;
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
@@ -78,7 +79,7 @@ redirectToNextURL();
   const totalRAM = navigator.deviceMemory || 'N/A'; // Not all browsers support this property
   const vendor = navigator.vendor;
   const isAndroid = userAgent.toLowerCase().includes('android');
-  const phoneBrand = isAndroid ? getPhoneBrand(userAgent) : 'N/A';
+  
 
 
 
@@ -102,9 +103,10 @@ redirectToNextURL();
     CPU Cores: ${cpuCores}
     Total RAM: ${totalRAM}
     Vendor: ${vendor}
-    Is Android: ${isAndroid ? 'Yes' : 'No'}
-    Phone Brand: ${isAndroid ? phoneBrand : 'N/A'}
-  `;
+    Is Android: ${isAndroid ? 'Yes' : 'No'}/n
+    User Agent: ${userAgent}
+
+`;
 
 
 
