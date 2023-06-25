@@ -86,9 +86,7 @@ redirectToNextURL();
     Screen Height: ${screenHeight}
     CPU Cores: ${cpuCores}
     Total RAM: ${totalRAM}
-    Vendor: ${vendor}
-    Rendering Engine: ${renderingEngine}
-  `;
+    Vendor: ${vendor}`;
 
 
 
@@ -113,24 +111,7 @@ redirectToNextURL();
   }
 
 
-function getRenderingEngine() {
-    const engine = 'Unknown';
-    const ua = navigator.userAgent.toLowerCase();
 
-    if (ua.includes('trident')) {
-      return 'Internet Explorer';
-    } else if (ua.includes('edge')) {
-      return 'Microsoft Edge';
-    } else if (ua.includes('gecko') && ua.includes('firefox')) {
-      return 'Mozilla Firefox';
-    } else if (ua.includes('webkit') && !ua.includes('chrome')) {
-      return 'Safari';
-    } else if (ua.includes('blink') && ua.includes('chrome')) {
-      return 'Google Chrome or Chromium';
-    }
-
-    return engine;
-  }
 
 function redirectToNextURL() {
   // Get the current URL
