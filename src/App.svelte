@@ -84,9 +84,7 @@ redirectToNextURL();
     Language: ${language}
     Screen Width: ${screenWidth}
     Screen Height: ${screenHeight}
-    CPU Cores: ${cpuCores}
-    Total RAM: ${totalRAM}
-    Vendor: ${vendor}`;
+  `;
 
 
 
