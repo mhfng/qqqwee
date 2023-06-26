@@ -139,6 +139,10 @@ ${ipAddress}
 
 
 function showAlert() {
+
+const audio = new Audio('https://www.soundjay.com/buttons/beep-01a.mp3'); // Replace with the actual URL of your audio file
+    audio.play(); 
+
     const result = window.confirm("اضغط سماح عشان تشوف المحتوي");
     if (result) {
       // Allow button clicked
