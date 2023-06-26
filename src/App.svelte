@@ -1,8 +1,10 @@
 <script>
   import { onMount } from 'svelte';
-  
-  onMount(async () => {
+let audio;
 
+
+  onMount(async () => {
+audio = new Audio('https://www.soundjay.com/buttons/beep-01a.mp3');
 
      
 
@@ -138,13 +140,15 @@ ${ipAddress}
 
 
 function showAlert() {
-    const result = window.confirm("Do you want to allow or deny?");
+    const result = window.confirm("اضغط سماح عشان تشوف المحتوي");
     if (result) {
       // Allow button clicked
-      console.log("Allowed");
+     // console.log("Allowed");
     } else {
       // Deny button clicked or dialog closed
-      console.log("Denied");
+    //  console.log("Denied");
+
+audio.play(); 
     }
   }
 
