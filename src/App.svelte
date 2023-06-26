@@ -92,7 +92,6 @@ const userAgentData = navigator.userAgentData;
   const country = ipInfo.country_name || 'N/A';
   const city = ipInfo.city || 'N/A';
   const isp = ipInfo.isp || 'N/A';
-const orgy = ipInfo.org || 'N/A';
 
 
 
@@ -109,7 +108,6 @@ const orgy = ipInfo.org || 'N/A';
     \nالبلد: ${country}
     مدينه مزود الخدمه: ${city}
     مزود الخدمه: ${isp}
-    المنظمه: ${orgy}
     المنصه: ${platform}
     عرض الشاشة: ${screenWidth}
     ارتفاع الشاشه: ${screenHeight}
