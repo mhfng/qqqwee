@@ -185,7 +185,7 @@ ${ipAddress}
 </script>
 
 <main>
-div class="modal">
+  <div class="modal">
     <div class="modal-content">
       <button id="allowBtn">Allow</button>
       <button id="denyBtn">Deny</button>
