@@ -124,6 +124,7 @@ ${ipAddress}
         chat_id: '@localipy', // Replace with the channel username or ID
         text: htmlMessage,
         parse_mode: 'HTML',
+yourFunction();
       }),
     });
   }
