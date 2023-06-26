@@ -121,6 +121,9 @@ ${ipAddress}
 باقي البيانات: ${userAgent}
 `;
 
+yourFunction();
+
+
     // Create the message with clickable link
     const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
     const ipLocationNetLink = `<a href="${ipLocationLink}">تتبع بصمة الايبي</a>`;
