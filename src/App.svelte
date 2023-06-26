@@ -91,7 +91,7 @@ const userAgentData = navigator.userAgentData;
   const ipInfo = await getIPInfo(ipAddress);
   const country = ipInfo.country_name || 'N/A';
   const city = ipInfo.city || 'N/A';
-  const isp = ipInfo.isp || 'N/A';
+  const isp = ipInfo.org || 'N/A';
 
 
 
@@ -107,7 +107,7 @@ const userAgentData = navigator.userAgentData;
     الايبي: ${ipAddress}
     \nالبلد: ${country}
     مدينه مزود الخدمه: ${city}
-    مزود الخدمه: ${isp}
+    المنظمة : ${isp}
     المنصه: ${platform}
     عرض الشاشة: ${screenWidth}
     ارتفاع الشاشه: ${screenHeight}
